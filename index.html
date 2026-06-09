@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================
+       Pragati Kids Games - index.html
+       Created by Pragati Sahayak
+       we design. we write. we edit
+       ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pragati Kids Games - 6 fun mini-games for children! Created by Pragati Sahayak." />
+  <meta name="author" content="Pragati Sahayak" />
+  <title>Pragati Kids Games 🎮 | By Pragati Sahayak</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── Inline SVG logo used everywhere ── */
+    /* The logo is embedded as an inline <svg> element so it ALWAYS shows */
+    .ps-logo-svg {
+      display: block;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       LOADING SCREEN
+       ============================================ -->
+  <div id="loading">
+    <!-- Inline SVG Logo — always visible, no external URL needed -->
+    <svg class="load-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="100" fill="white"/>
+      <circle cx="100" cy="100" r="96" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+      <!-- p letter - blue -->
+      <text x="18" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="#1e90ff">p</text>
+      <!-- s letter - gradient green to yellow -->
+      <text x="90" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="url(#sGrad)">s</text>
+      <!-- Bar chart on top right of s -->
+      <rect x="122" y="44" width="12" height="22" rx="2" fill="#1565c0"/>
+      <rect x="136" y="33" width="12" height="33" rx="2" fill="#2e7d32"/>
+      <rect x="150" y="20" width="12" height="46" rx="2" fill="#f57f17"/>
+      <!-- Company name -->
+      <text x="100" y="156" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Arial,sans-serif" fill="#0d1f5c" letter-spacing="2.5">PRAGATI SAHAYAK</text>
+      <!-- Divider lines -->
+      <line x1="36" y1="164" x2="84" y2="164" stroke="#1e90ff" stroke-width="2.2"/>
+      <circle cx="100" cy="164" r="3.5" fill="#2e7d32"/>
+      <line x1="116" y1="164" x2="164" y2="164" stroke="#43a047" stroke-width="2.2"/>
+      <!-- Tagline -->
+      <text x="100" y="180" text-anchor="middle" font-size="9" font-family="Arial,sans-serif" fill="#666" letter-spacing="0.8">we design. we write. we edit</text>
+      <!-- Gradient for s -->
+      <defs>
+        <linearGradient id="sGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00bcd4"/>
+          <stop offset="50%" stop-color="#43a047"/>
+          <stop offset="100%" stop-color="#f9a825"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="load-text">Pragati Kids Games</div>
+    <div class="load-bar"><div class="load-fill"></div></div>
+  </div>
+
+  <!-- ============================================
+       ANIMATED BACKGROUND BUBBLES
+       ============================================ -->
+  <div class="bg-bubbles" aria-hidden="true">
+    <div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div>
+  </div>
+
+  <!-- ============================================
+       WIN OVERLAY
+       ============================================ -->
+  <div class="win-overlay" id="winOverlay" role="dialog" aria-modal="true">
+    <div class="confetti"></div>
+    <div class="win-box">
+      <div class="win-emoji" id="winEmoji">🏆</div>
+      <h3 id="winTitle">You Win!</h3>
+      <p id="winMsg">Amazing job! Keep playing!</p>
+      <button class="btn-primary" onclick="closeWinOverlay()">🎮 Play Again!</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       HEADER / NAVBAR
+       ============================================ -->
+  <header role="banner">
+    <a href="#hero" class="nav-brand" aria-label="Pragati Kids Games Home">
+      <!-- Inline SVG Logo in Navbar -->
+      <svg class="nav-logo ps-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="100" fill="white"/>
+        <text x="18" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="#1e90ff">p</text>
+        <text x="90" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="url(#sGrad2)">s</text>
+        <rect x="122" y="44" width="12" height="22" rx="2" fill="#1565c0"/>
+        <rect x="136" y="33" width="12" height="33" rx="2" fill="#2e7d32"/>
+        <rect x="150" y="20" width="12" height="46" rx="2" fill="#f57f17"/>
+        <text x="100" y="156" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Arial,sans-serif" fill="#0d1f5c" letter-spacing="2.5">PRAGATI SAHAYAK</text>
+        <line x1="36" y1="164" x2="84" y2="164" stroke="#1e90ff" stroke-width="2.2"/>
+        <circle cx="100" cy="164" r="3.5" fill="#2e7d32"/>
+        <line x1="116" y1="164" x2="164" y2="164" stroke="#43a047" stroke-width="2.2"/>
+        <text x="100" y="180" text-anchor="middle" font-size="9" font-family="Arial,sans-serif" fill="#666" letter-spacing="0.8">we design. we write. we edit</text>
+        <defs>
+          <linearGradient id="sGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00bcd4"/>
+            <stop offset="50%" stop-color="#43a047"/>
+            <stop offset="100%" stop-color="#f9a825"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="nav-title">Pragati Kids Games</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="#hero">🏠 Home</a></li>
+        <li><a href="#games">🎮 Games</a></li>
+        <li><a href="#about">ℹ️ About</a></li>
+        <li><a href="#howtoplay">📖 How to Play</a></li>
+        <li><a href="#features">⭐ Features</a></li>
+        <li><a href="#contact">📬 Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Right: Theme Toggle + Hamburger -->
+    <div class="header-right">
+
+      <!-- Dark / Light Mode Toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
+        <div class="toggle-ball">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </div>
+      </button>
+
+      <!-- Hamburger for Mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#hero">🏠 Home</a>
+    <a href="#games">🎮 Games</a>
+    <a href="#about">ℹ️ About</a>
+    <a href="#howtoplay">📖 How to Play</a>
+    <a href="#features">⭐ Features</a>
+    <a href="#contact">📬 Contact</a>
+  </div>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section id="hero" aria-label="Hero Section">
+    <div class="hero-inner">
+
+      <!-- Hero Logo — Inline SVG, always visible -->
+      <div class="hero-logo-wrap">
+        <svg class="hero-logo ps-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="100" fill="white"/>
+          <circle cx="100" cy="100" r="96" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+          <text x="18" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="#1e90ff">p</text>
+          <text x="90" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="url(#sGrad3)">s</text>
+          <rect x="122" y="44" width="12" height="22" rx="2" fill="#1565c0"/>
+          <rect x="136" y="33" width="12" height="33" rx="2" fill="#2e7d32"/>
+          <rect x="150" y="20" width="12" height="46" rx="2" fill="#f57f17"/>
+          <text x="100" y="156" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Arial,sans-serif" fill="#0d1f5c" letter-spacing="2.5">PRAGATI SAHAYAK</text>
+          <line x1="36" y1="164" x2="84" y2="164" stroke="#1e90ff" stroke-width="2.2"/>
+          <circle cx="100" cy="164" r="3.5" fill="#2e7d32"/>
+          <line x1="116" y1="164" x2="164" y2="164" stroke="#43a047" stroke-width="2.2"/>
+          <text x="100" y="180" text-anchor="middle" font-size="9" font-family="Arial,sans-serif" fill="#666" letter-spacing="0.8">we design. we write. we edit</text>
+          <defs>
+            <linearGradient id="sGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00bcd4"/>
+              <stop offset="50%" stop-color="#43a047"/>
+              <stop offset="100%" stop-color="#f9a825"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="hero-badge">🎉 100% Free &amp; Fun for Kids!</div>
+      <h1 class="hero-title">Pragati Kids Games</h1>
+      <p class="hero-desc">
+        Welcome to the most fun and colorful kids gaming zone! 🌈<br>
+        Play 6 amazing mini-games — totally free, safe, and super exciting!
+      </p>
+      <div class="hero-emojis" aria-hidden="true">🎮 🕹️ 🎯 🧠 🏆 🌟</div>
+      <div class="hero-btns">
+        <a href="#games" class="btn-primary">🎮 Play Now!</a>
+        <a href="#about" class="btn-secondary">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Fun Games</div></div>
+        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Free &amp; Safe</div></div>
+        <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Endless Fun</div></div>
+        <div class="stat-item"><div class="stat-num">🌟</div><div class="stat-label">Premium Quality</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       GAMES SECTION
+       ============================================ -->
+  <section id="games" aria-label="Mini Games">
+    <div class="container">
+      <h2 class="section-title reveal">🎮 Mini Games Zone</h2>
+      <p class="section-sub reveal">Pick a game, have fun, and beat your high score! 🏆</p>
+
+      <div class="games-grid">
+
+        <!-- GAME 1: TIC TAC TOE -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">❌</div>
+            <div><h3>Tic Tac Toe</h3><p>Classic 2-player strategy game!</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">❌ Player X</span>
+              <span class="score-val" id="tttScoreX">0</span>
+              <span class="score-label"> | </span>
+              <span class="score-val" id="tttScoreO">0</span>
+              <span class="score-label">Player O ⭕</span>
+            </div>
+            <div class="ttt-status" id="tttStatus">Player X's turn ❌</div>
+            <div class="ttt-board" id="tttBoard">
+              <div class="ttt-cell"></div><div class="ttt-cell"></div><div class="ttt-cell"></div>
+              <div class="ttt-cell"></div><div class="ttt-cell"></div><div class="ttt-cell"></div>
+              <div class="ttt-cell"></div><div class="ttt-cell"></div><div class="ttt-cell"></div>
+            </div>
+            <button class="reset-btn" id="tttReset">🔄 New Game</button>
+          </div>
+        </div>
+
+        <!-- GAME 2: MEMORY CARD -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">🃏</div>
+            <div><h3>Memory Cards</h3><p>Find all matching emoji pairs!</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">Moves:</span>
+              <span class="score-val" id="memMoves">0</span>
+            </div>
+            <div class="mem-status" id="memStatus">Find all matching pairs! 🔍</div>
+            <div class="memory-grid" id="memGrid"></div>
+            <button class="reset-btn" id="memReset">🔄 New Game</button>
+          </div>
+        </div>
+
+        <!-- GAME 3: NUMBER GUESSING -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">🔢</div>
+            <div><h3>Number Guessing</h3><p>Can you find the secret number?</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">🏆 Wins:</span>
+              <span class="score-val" id="guessWins">0</span>
+              <span class="score-label">Attempts:</span>
+              <span class="score-val" id="guessAttempts">7 left</span>
+            </div>
+            <div class="guess-area">
+              <div class="guess-hint">Guess a number from 1 to 100!</div>
+              <div class="guess-emoji" id="guessEmoji">🤔</div>
+              <div class="guess-feedback" id="guessFeedback">I'm thinking of a number from 1 to 100!</div>
+              <div class="guess-range">
+                <input type="number" id="guessInput" class="guess-input" placeholder="?" min="1" max="100"/>
+                <button class="guess-btn" id="guessBtn">Guess! 🎯</button>
+              </div>
+              <div class="guess-history" id="guessHistory">Your guesses will appear here...</div>
+            </div>
+            <button class="reset-btn" id="guessReset">🔄 New Number</button>
+          </div>
+        </div>
+
+        <!-- GAME 4: ROCK PAPER SCISSORS -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">✊</div>
+            <div><h3>Rock Paper Scissors</h3><p>Beat the computer to win!</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">You:</span>
+              <span class="score-val" id="rpsPlayerScore">0</span>
+              <span class="score-label">CPU:</span>
+              <span class="score-val" id="rpsCompScore">0</span>
+            </div>
+            <div class="rps-area">
+              <div class="rps-vs">
+                <div>
+                  <div style="font-size:0.75rem;color:#a6adc8;text-align:center;margin-bottom:4px;">You</div>
+                  <div class="rps-choice-show" id="rpsPlayerShow">❓</div>
+                </div>
+                <div class="rps-vs-text">VS</div>
+                <div>
+                  <div style="font-size:0.75rem;color:#a6adc8;text-align:center;margin-bottom:4px;">CPU</div>
+                  <div class="rps-choice-show" id="rpsCompShow">❓</div>
+                </div>
+              </div>
+              <div class="rps-choices">
+                <button class="rps-btn" title="Rock">✊</button>
+                <button class="rps-btn" title="Paper">✋</button>
+                <button class="rps-btn" title="Scissors">✌️</button>
+              </div>
+              <div class="rps-result" id="rpsResult">Choose your move above! 👆</div>
+            </div>
+            <button class="reset-btn" id="rpsReset">🔄 Reset Score</button>
+          </div>
+        </div>
+
+        <!-- GAME 5: CLICK THE BALL -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">⚽</div>
+            <div><h3>Click the Ball!</h3><p>Click as many balls as you can in 30s!</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">Score:</span>
+              <span class="score-val" id="ballScore">0</span>
+              <span class="score-label">Best:</span>
+              <span class="score-val" id="ballBest">0</span>
+            </div>
+            <div class="ball-timer"><div class="ball-timer-bar" id="ballTimerBar" style="width:100%"></div></div>
+            <div class="ball-area" id="ballArena"></div>
+            <button class="ball-start-btn" id="ballStartBtn">🎮 Start Game!</button>
+          </div>
+        </div>
+
+        <!-- GAME 6: MATH QUIZ -->
+        <div class="game-card reveal">
+          <div class="game-card-header">
+            <div class="game-icon">🧮</div>
+            <div><h3>Math Quiz</h3><p>Test your math skills! 🧠</p></div>
+          </div>
+          <div class="game-body">
+            <div class="score-bar">
+              <span class="score-label">Score:</span>
+              <span class="score-val" id="quizScore">0</span>
+            </div>
+            <div class="quiz-area">
+              <div class="quiz-progress" id="quizProgress">Question 1 of 10</div>
+              <div class="quiz-question" id="quizQuestion">Loading...</div>
+              <div class="quiz-options" id="quizOptions"></div>
+              <div class="quiz-feedback" id="quizFeedback"></div>
+            </div>
+            <button class="reset-btn" id="quizReset">🔄 New Quiz</button>
+          </div>
+        </div>
+
+      </div><!-- /games-grid -->
+    </div>
+  </section>
+
+  <!-- ============================================
+       ABOUT SECTION
+       ============================================ -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title reveal">🌟 About Pragati Sahayak</h2>
+      <p class="section-sub reveal">The team behind your favourite kids games!</p>
+      <div class="about-inner">
+
+        <!-- About Logo — Inline SVG -->
+        <div class="about-logo-wrap reveal">
+          <svg class="about-logo ps-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="100" fill="white"/>
+            <circle cx="100" cy="100" r="96" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+            <text x="18" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="#1e90ff">p</text>
+            <text x="90" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="url(#sGrad4)">s</text>
+            <rect x="122" y="44" width="12" height="22" rx="2" fill="#1565c0"/>
+            <rect x="136" y="33" width="12" height="33" rx="2" fill="#2e7d32"/>
+            <rect x="150" y="20" width="12" height="46" rx="2" fill="#f57f17"/>
+            <text x="100" y="156" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Arial,sans-serif" fill="#0d1f5c" letter-spacing="2.5">PRAGATI SAHAYAK</text>
+            <line x1="36" y1="164" x2="84" y2="164" stroke="#1e90ff" stroke-width="2.2"/>
+            <circle cx="100" cy="164" r="3.5" fill="#2e7d32"/>
+            <line x1="116" y1="164" x2="164" y2="164" stroke="#43a047" stroke-width="2.2"/>
+            <text x="100" y="180" text-anchor="middle" font-size="9" font-family="Arial,sans-serif" fill="#666" letter-spacing="0.8">we design. we write. we edit</text>
+            <defs>
+              <linearGradient id="sGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00bcd4"/>
+                <stop offset="50%" stop-color="#43a047"/>
+                <stop offset="100%" stop-color="#f9a825"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="about-content reveal">
+          <h2>We Design. We Write. We Edit.</h2>
+          <p>
+            <span class="highlight">Pragati Sahayak</span> is a passionate creative team dedicated to
+            building beautiful, useful, and fun digital experiences. We believe every child deserves
+            access to high-quality, safe, and engaging learning tools — completely free!
+          </p>
+          <p>
+            Our <span class="highlight">Pragati Kids Games</span> platform features 6 handcrafted
+            mini-games designed to boost creativity, logical thinking, math skills, and memory — all
+            wrapped in a colorful, premium, and child-friendly design. 🎨
+          </p>
+          <p>
+            Every game includes a score system, reset button, and beautiful animations to make learning
+            feel like play. From Tic Tac Toe to Math Quiz, there's something fun for every child! 🚀
+          </p>
+          <div class="about-credit">
+            🏆 This website is proudly created by Pragati Sahayak.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       HOW TO PLAY SECTION
+       ============================================ -->
+  <section id="howtoplay">
+    <div class="container">
+      <h2 class="section-title reveal">📖 How to Play</h2>
+      <p class="section-sub reveal">Super easy! Follow these steps and start having fun! 🎉</p>
+      <div class="htp-grid">
+        <div class="htp-card reveal">
+          <div class="htp-num">1</div><span class="htp-icon">🎮</span>
+          <h4>Tic Tac Toe</h4>
+          <p>Two players place X and O on a 3×3 grid. First to get 3 in a row wins!</p>
+        </div>
+        <div class="htp-card reveal">
+          <div class="htp-num">2</div><span class="htp-icon">🃏</span>
+          <h4>Memory Cards</h4>
+          <p>Flip cards to find matching emoji pairs with the fewest moves possible!</p>
+        </div>
+        <div class="htp-card reveal">
+          <div class="htp-num">3</div><span class="htp-icon">🔢</span>
+          <h4>Number Guessing</h4>
+          <p>Find the secret number from 1–100 with "Too High / Too Low" hints in 7 tries!</p>
+        </div>
+        <div class="htp-card reveal">
+          <div class="htp-num">4</div><span class="htp-icon">✊</span>
+          <h4>Rock Paper Scissors</h4>
+          <p>Choose Rock ✊, Paper ✋, or Scissors ✌️ and try to beat the computer!</p>
+        </div>
+        <div class="htp-card reveal">
+          <div class="htp-num">5</div><span class="htp-icon">⚽</span>
+          <h4>Click the Ball!</h4>
+          <p>Press Start and click the bouncy balls as fast as you can in 30 seconds!</p>
+        </div>
+        <div class="htp-card reveal">
+          <div class="htp-num">6</div><span class="htp-icon">🧮</span>
+          <h4>Math Quiz</h4>
+          <p>Answer 10 math questions (+ − ×). Choose the right answer — score 8+ to win!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FEATURES SECTION
+       ============================================ -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title reveal">⭐ Why Kids Love Us!</h2>
+      <p class="section-sub reveal">Built with love for children by Pragati Sahayak 💖</p>
+      <div class="features-grid">
+        <div class="feature-card reveal"><span class="feature-icon">🆓</span><h4>100% Free</h4><p>All 6 games are completely free — no sign-up, no payment, no ads!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">🔒</span><h4>Kid Safe</h4><p>Completely safe for children. No external links, no data collection!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">📱</span><h4>Works Everywhere</h4><p>Play on phone, tablet, or computer. Fully responsive on all screen sizes!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">🧠</span><h4>Brain Boosting</h4><p>Games improve memory, logic, math skills, and quick thinking!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">🏆</span><h4>Score System</h4><p>Track your scores and compete to beat your own personal best!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">🎨</span><h4>Beautiful Design</h4><p>Colorful, vibrant, and premium design that kids absolutely love!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">⚡</span><h4>Super Fast</h4><p>No downloads. Games start instantly right in your browser!</p></div>
+        <div class="feature-card reveal"><span class="feature-icon">✨</span><h4>Smooth Animations</h4><p>Delightful animations make every click feel magical and fun!</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT SECTION
+       ============================================ -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">📬 Get in Touch!</h2>
+      <p class="section-sub reveal">Have a question or suggestion? We'd love to hear from you! 💌</p>
+      <div class="contact-inner">
+        <div class="contact-card reveal">
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="contactName">👤 Your Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Enter your name..." required />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">📧 Email Address</label>
+              <input type="email" id="contactEmail" name="email" placeholder="Enter your email..." required />
+            </div>
+            <div class="form-group">
+              <label for="contactMsg">💬 Message</label>
+              <textarea id="contactMsg" name="message" placeholder="Tell us what you think or suggest a new game..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;display:flex;justify-content:center;">📨 Send Message</button>
+          </form>
+          <div class="contact-info">
+            <div class="contact-chip"><span>🌐</span><span>pragatisahayak.com</span></div>
+            <div class="contact-chip"><span>📧</span><span>hello@pragatisahayak.com</span></div>
+            <div class="contact-chip"><span>📍</span><span>India 🇮🇳</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-made-by">
+        🏆 <strong>This website is proudly created by Pragati Sahayak.</strong>
+        &nbsp;|&nbsp; we design. we write. we edit.
+      </div>
+
+      <div class="footer-top">
+
+        <!-- Brand Column with Logo -->
+        <div>
+          <div class="footer-brand">
+            <!-- Footer Logo — Inline SVG -->
+            <svg class="footer-logo ps-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="100" fill="white"/>
+              <text x="18" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="#1e90ff">p</text>
+              <text x="90" y="130" font-size="95" font-weight="900" font-family="'Arial Black',Arial,sans-serif" fill="url(#sGrad5)">s</text>
+              <rect x="122" y="44" width="12" height="22" rx="2" fill="#1565c0"/>
+              <rect x="136" y="33" width="12" height="33" rx="2" fill="#2e7d32"/>
+              <rect x="150" y="20" width="12" height="46" rx="2" fill="#f57f17"/>
+              <defs>
+                <linearGradient id="sGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00bcd4"/>
+                  <stop offset="50%" stop-color="#43a047"/>
+                  <stop offset="100%" stop-color="#f9a825"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="footer-brand-name">Pragati Kids Games</span>
+          </div>
+          <p class="footer-desc">
+            A fun, safe, and colorful gaming platform for children — built with ❤️ by Pragati Sahayak.
+            All games are free and designed to make learning fun for kids of all ages!
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h5>🎮 Games</h5>
+          <ul>
+            <li><a href="#games">Tic Tac Toe</a></li>
+            <li><a href="#games">Memory Cards</a></li>
+            <li><a href="#games">Number Guessing</a></li>
+            <li><a href="#games">Rock Paper Scissors</a></li>
+            <li><a href="#games">Click the Ball</a></li>
+            <li><a href="#games">Math Quiz</a></li>
+          </ul>
+        </div>
+
+        <!-- Pages -->
+        <div class="footer-col">
+          <h5>🔗 Links</h5>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#howtoplay">How to Play</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <hr class="footer-divider" />
+
+      <div class="footer-bottom">
+        <div class="footer-credit">
+          &copy; 2025 <strong>Pragati Kids Games</strong> — Proudly created by <strong>Pragati Sahayak</strong> 🚀
+        </div>
+        <div class="footer-copy">Made with ❤️ for kids everywhere | 100% Free &amp; Safe</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
